@@ -54,10 +54,18 @@
         box-sizing: border-box;
         height: 18px;
         width: 4px;
+        display: flex;
+        justify-content: center;
+        color: black;
+        line-height: 20px;
+        font-size: 18pt;
+        position: absolute;
+    }
+    .numbers>:nth-child(3n+2), .numbers>:nth-child(3n+3){
+        color: transparent;
         background: #000;
         box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2),
                     inset 1.5px 0.3px 1px rgba(175, 175, 175, 0.685);
-        position: absolute;
     }
     .one {
         right: 26%;
@@ -85,6 +93,7 @@
         transform:rotate(150deg)
     }
     .six {
+        right: 50%;
         bottom: 0;
         transform: rotate(180deg);
     }
@@ -112,6 +121,9 @@
         left: 26%;
         top: 6%;
         transform:rotate(330deg)
+    }
+    .twelve {
+        right: 50%;
     }
 
     .clock-face {
@@ -198,18 +210,18 @@
 
 <div class="clock">
     <div class="numbers">
-        <div class="twelve"></div>
-        <div class="eleven"></div>
-        <div class="ten"></div>
-        <div class="nine"></div>
-        <div class="eight"></div>
-        <div class="seven"></div>
-        <div class="six"></div>
-        <div class="five"></div>
-        <div class="four"></div>
-        <div class="three"></div>
-        <div class="two"></div>
-        <div class="one"></div>
+        <div class="twelve">12</div>
+        <div class="eleven">11</div>
+        <div class="ten">10</div>
+        <div class="nine">9</div>
+        <div class="eight">8</div>
+        <div class="seven">7</div>
+        <div class="six">6</div>
+        <div class="five">5</div>
+        <div class="four">4</div>
+        <div class="three">3</div>
+        <div class="two">2</div>
+        <div class="one">1</div>
     </div>
         <div class="clock-face">
             <div class="hand hour-hand"></div>

@@ -1,0 +1,253 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    html {
+        background: #018ded url('http://unsplash.it/1500/1000?image=881&blur=50');
+        background-size: cover;
+        font-family: 'helvetica neue';
+        text-align: center;
+        font-size: 10px;
+    }
+
+    body {
+        font-size: 2rem;
+        display: flex;
+        flex:1;
+        min-height: 100vh;
+        align-items: center;
+    }
+
+    .clock {
+        background: rgba(255,255,255,1);
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid white;
+        border-radius: 50%;
+        margin: 50px auto;
+        position: relative;
+        padding: 2rem;
+        box-shadow:
+            0 0 0px 4px rgba(0,0,0,0.1),
+            inset 0 0 0 3px #efefef,
+            inset 0 0 10px black,
+            0 0 10px rgba(0,0,0,0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .numbers {
+        width: 30rem;
+        height: 30rem;
+        border-radius: 50%;
+        position: absolute;
+        margin: auto auto;
+        /* border: 1px solid white; */
+    }
+    .numbers>:nth-child(n) {
+        display: inline-block;
+        box-sizing: border-box;
+        height: 18px;
+        width: 4px;
+        background: #000;
+        box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2),
+                    inset 1.5px 0.3px 1px rgba(175, 175, 175, 0.685);
+        position: absolute;
+    }
+    .one {
+        right: 26%;
+        top: 6%;
+        transform: rotate(30deg);
+    }
+    .two {
+        right: 9%;
+        top: 23%;
+        transform: rotate(60deg);
+    }
+    .three {
+        right: 2%;
+        top: 48%;
+        transform:rotate(90deg)
+    }
+    .four {
+        right: 9%;
+        bottom: 23%;
+        transform: rotate(120deg);
+    }
+    .five {
+        right: 26%;
+        bottom: 6%;
+        transform:rotate(150deg)
+    }
+    .six {
+        bottom: 0;
+        transform: rotate(180deg);
+    }
+    .seven {
+        left: 26%;
+        bottom: 6%;
+        transform: rotate(210deg);
+    }
+    .eight {
+        left: 9%;
+        bottom: 23%;
+        transform:rotate(240deg)
+    }
+    .nine {
+        left: 2%;
+        top: 48%;
+        transform:rotate(270deg)
+    }
+    .ten {
+        left: 9%;
+        top: 23%;
+        transform: rotate(300deg);
+    }
+    .eleven {
+        left: 26%;
+        top: 6%;
+        transform:rotate(330deg)
+    }
+
+    .clock-face {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-3px); /*for the height of the clock hands*/
+    }
+
+    .hand {
+        width: 50%;
+        height: 6px;
+        background: black;
+        box-shadow: 12px 2px 5px rgba(0, 0, 0, 0.3),
+                    inset -1.5px -2.3px 4.5px rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%; /*it will put the transformation handle to the end of the hand */
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0, 2.76, 0.58, 1);
+        z-index: 1;
+    }
+    .hand::after {
+        content: '';
+        position: absolute;
+        z-index: -17; 
+        box-shadow: -15px 0px 81px 2px rgba(0, 0, 0, 0.3);
+        left: 15%;
+        top: 0;
+        width: 87%;
+        height: 3px;
+        z-index: -1;
+    }
+
+    .hand.second-hand{
+        width: 60%;
+        transform-origin: 83%;
+        height: 3px;
+        background: red;
+        z-index: 5;
+        box-shadow: 12px 2px 5px rgba(0, 0, 0, 0.3),
+                    inset -1.5px -2.3px 4.5px rgba(185, 41, 41, 0.3);
+    }
+    .middledot-red{
+        display: inline-block;
+        height: 14px;
+        width: 14px;
+        background: red;
+        border: 0.1px solid red;
+        border-radius: 50%;
+        position: absolute;
+        margin-top: 48.5%;
+        margin-left: -2.5%;
+        content: '';
+        z-index: 7;
+        box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.3),
+                    inset -1.5px -2.3px 4.5px rgba(185, 41, 41, 0.3);
+    }
+    .middledot-black{
+        display: inline-block;
+        height: 13px;
+        width: 13px;
+        background: black;
+        border: 3px solid black;
+        border-radius: 50%;
+        position: absolute;
+        margin-top: 48%;
+        margin-left: -3.2%;
+        content: '';
+        z-index: 1;
+    }
+    .hand.hour-hand{
+        height: 10px;
+        margin-top: -3px;
+        margin-left: 10%;
+        width: 40%;
+        z-index: 4;
+    }
+</style>
+
+<body>
+
+<div class="clock">
+    <div class="numbers">
+        <div class="twelve"></div>
+        <div class="eleven"></div>
+        <div class="ten"></div>
+        <div class="nine"></div>
+        <div class="eight"></div>
+        <div class="seven"></div>
+        <div class="six"></div>
+        <div class="five"></div>
+        <div class="four"></div>
+        <div class="three"></div>
+        <div class="two"></div>
+        <div class="one"></div>
+    </div>
+        <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+            <div class="middledot-black"></div>
+            <div class="middledot-red"></div>
+        </div>
+</div>
+<script>
+const numplates;
+numplates = 12;
+
+
+</script>
+<script>
+    const secondHand = document.querySelector('.second-hand');
+    const minHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+
+    function setDate() {
+        const now = new Date();
+
+        const seconds = now.getSeconds();
+        const secondsDegrees = ((seconds / 60) * 360) +90;
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+        const mins = now.getMinutes();
+        const minsDegrees = ((mins / 60) * 360) +90;
+        minHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+        const hours = now.getHours();
+        const hoursDegrees = ((hours / 12) * 360) +90;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+    }
+
+    setInterval(setDate, 1000);
+</script>
+
+</body>
+</html>

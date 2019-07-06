@@ -43,82 +43,51 @@
     }
 
     .numbers {
-        width: 30rem;
-        height: 30rem;
+        transform: rotate(120deg);
+        width: 80%;
+        height: 80%;
         border-radius: 50%;
         position: absolute;
         margin: auto auto;
         border: 1px solid rgba(34, 34, 34, 0.02);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .numbers>:nth-child(n) {
         display: inline-block;
         box-sizing: border-box;
-        height: 18px;
-        width: 4px;
+        height: 4px;
+        width: 10%;
+        left: -27px;
+        transform-origin: 600%;
         display: flex;
         justify-content: center;
         color: #222;
         background: transparent;
-        line-height: 20px;
+        line-height: 0px;
         font-size: 18pt;
         position: absolute;
         transform: none;
         z-index: -1;
     }
+    .numbers>:nth-child(n)>:nth-child(n) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+    }
     .numbers>:nth-child(3n+1), .numbers>:nth-child(3n+2){
         color: transparent;
         background: #000;
+        border: none;
         box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2),
                     inset 1.5px 0.3px 1px rgba(175, 175, 175, 0.685);
     }
-    .num1 {
-        right: 26%;
-        top: 6%;
+    .numbers>:nth-child(3n+1)>:nth-child(n), .numbers>:nth-child(3n+2)>:nth-child(n){
+        border: none;
     }
-    .num2 {
-        right: 9%;
-        top: 23%;
-    }
-    .num3 {
-        right: 2%;
-        top: 47%;
-    }
-    .num4 {
-        right: 9%;
-        bottom: 23%;
-    }
-    .num5 {
-        right: 26%;
-        bottom: 6%;
-        transform:rotate(150deg)
-    }
-    .num6 {
-        right: 52%;
-        bottom: 0;
-    }
-    .num7 {
-        left: 26%;
-        bottom: 6%;
-    }
-    .num8 {
-        left: 9%;
-        bottom: 23%;
-    }
-    .num9 {
-        left: 2%;
-        top: 47%;
-    }
-    .num10 {
-        left: 9%;
-        top: 23%;
-    }
-    .num11 {
-        left: 26%;
-        top: 6%;
-    }
-    .num12 {
-        right: 50%;
-    }
+
 
     .clock-face {
         position: relative;
@@ -234,20 +203,26 @@ numberplate.innerHTML += `<div class="numbers"></div>`;
 const numberHolder = document.querySelector('.numbers');
 
 numbers.forEach(number => {
-    numberHolder.innerHTML += `<div class="num${number}">${number}</div>`;
+    numberHolder.innerHTML += `<div class="num${number}"><span>${number}</span></div>`;
 });
 
 const numberfor = document.querySelector('.numbers').childNodes;
 
-for (let i = 0; i < numbers.length-1; i++) {
-    let angle = ((1+i)*(360/n));
-    //console.log(numberfor[i], angle)
+for (let i = 0; i < numbers.length; i++) {
+    let angle = ((i)*(360/n));
     let numberOrDash = getComputedStyle(numberfor[i]).boxShadow;
-    
-    //console.log(numberOrDash);
-
-    (numberOrDash !== 'none') ? (numberfor[i].style.setProperty ('transform', 'rotate('+angle+'deg)')) : (numberfor[i].style.setProperty ('transform', 'none'));
-
+    let numberSpan = numberfor[i].firstElementChild;
+    console.log(angle);
+    (numberOrDash !== 'none') ? (
+        numberfor[i].style.setProperty ('transform', 'rotate('+angle+'deg)')
+    ) : (
+        numberfor[i].style.setProperty ('transform', 'rotate('+angle+'deg)')
+        ,
+        ((i >= 3) && (i <= 7 )) ?
+        numberSpan.style.setProperty ('transform', 'rotate('+90+'deg)')
+        :
+        numberSpan.style.setProperty ('transform', 'rotate('+270+'deg)')
+    );
 }
 
 </script>
@@ -277,21 +252,3 @@ for (let i = 0; i < numbers.length-1; i++) {
 
 </body>
 </html>
-
-
-
-
-<!-- <div class="numbers">
-        <div class="twelve">12</div>
-        <div class="eleven">11</div>
-        <div class="ten">10</div>
-        <div class="nine">9</div>
-        <div class="eight">8</div>
-        <div class="seven">7</div>
-        <div class="six">6</div>
-        <div class="five">5</div>
-        <div class="four">4</div>
-        <div class="three">3</div>
-        <div class="two">2</div>
-        <div class="one">1</div>
-    </div> -->

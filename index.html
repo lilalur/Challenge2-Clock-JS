@@ -45,7 +45,7 @@
     .numbers, .stripes {
         transform: rotate(120deg);
         width: 75%;
-        height: 80%;
+        height: 75%;
         border-radius: 50%;
         position: absolute;
         margin: auto auto;
@@ -58,6 +58,7 @@
     .stripes {
         transform: rotate(126.6deg);
         width: 84%;
+        height: 84%;
     }
 
     .numbers>:nth-child(n), .stripes>:nth-child(n) {
@@ -114,7 +115,7 @@
         width: 50%;
         height: 6px;
         background: rgb(240, 240, 240);
-        box-shadow: 12px 2px 5px rgba(0, 0, 0, 0.3),
+        box-shadow: 8px 2px 5px rgba(0, 0, 0, 0.3),
                     inset -1.5px -2.3px 4.5px rgba(255, 255, 255, 0.3);
         border-radius: 15px;
         position: absolute;
@@ -144,7 +145,7 @@
         background: #ffffff;
         z-index: 5;
         border-radius: 100%;
-        box-shadow: 4px -3px 5px rgba(0, 0, 0, 0.3),
+        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3),
                     inset -1.5px -2.3px 4.5px rgba(206, 206, 206, 0.3);
     }
     
@@ -152,13 +153,13 @@
         top: -25px;
         left: 173px;
         border-bottom: 52px solid #ffffff;
-        border-left: 3px solid transparent;
-        border-right: 3px solid rgba(0, 0, 0, 0.2);
+        border-left: 3px solid rgba(0, 0, 0, 0.2);
+        border-right: 3px solid transparent;
         height: 0;
         width: 3px;
         transform: rotate(270deg);
         z-index: 5;
-        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3),
+        box-shadow: -3px 4px 4px rgba(0, 0, 0, 0.3),
                     inset -1.5px -2.3px 4.5px rgba(206, 206, 206, 0.3);
     }
     .middledot-top{
@@ -197,12 +198,21 @@
         width: 40%;
         z-index: 0;
     }
+    h1 {
+        position: absolute;
+        font-size: 12pt;
+        color: #f1f1f1;
+        font-family: cursive;
+        width: 100%;
+        margin-top: 70px;
+    }
 </style>
 
 <body>
 
 <div class="clock">
         <div class="clock-face">
+            <h1>Lilalur's clock</h1>
             <div class="hand hour-hand"></div>
             <div class="hand min-hand"></div>
             <div class="hand second-hand"></div>
@@ -254,7 +264,7 @@ const m = 60;
     const stripeHolder = document.querySelector('.stripes');
 
     stripes.forEach(stripe => {
-        stripeHolder.innerHTML += `<div class="num${stripe}"><span>-</span></div>`;
+        stripeHolder.innerHTML += `<div class="stripe${stripe}"><span>-</span></div>`;
     });
     const stripefor = document.querySelector('.stripes').childNodes;
 

@@ -115,15 +115,13 @@
         width: 50%;
         height: 6px;
         background: rgb(240, 240, 240);
-        box-shadow: 8px 2px 5px rgba(0, 0, 0, 0.3),
-                    inset -1.5px -2.3px 4.5px rgba(255, 255, 255, 0.3);
+        box-shadow: inset -1.5px -2.3px 4.5px rgba(255, 255, 255, 0.3);
         border-radius: 15px;
         position: absolute;
         top: 50%;
         transform-origin: 100%; /*it will put the transformation handle to the end of the hand */
         transform: rotate(90deg);
         transition: all 0.05s;
-        transition-timing-function: cubic-bezier(0, 2.76, 0.58, 1);
         z-index: 1;
     }
     .hand::after {
@@ -145,11 +143,10 @@
         background: #ffffff;
         z-index: 5;
         border-radius: 100%;
-        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3),
-                    inset -1.5px -2.3px 4.5px rgba(206, 206, 206, 0.3);
+        box-shadow: inset -1.5px -2.3px 4.5px rgba(206, 206, 206, 0.3);
     }
     
-    .hand.second-hand::after {
+    /* .hand.second-hand::after {
         top: -25px;
         left: 173px;
         border-bottom: 52px solid #ffffff;
@@ -161,7 +158,7 @@
         z-index: 5;
         box-shadow: -3px 4px 4px rgba(0, 0, 0, 0.3),
                     inset -1.5px -2.3px 4.5px rgba(206, 206, 206, 0.3);
-    }
+    } */
     .middledot-top{
         display: inline-block;
         height: 14px;
@@ -244,7 +241,7 @@ const m = 60;
         let angle = ((i)*(360/n));
         let numberOrDash = getComputedStyle(numberfor[i]).boxShadow;
         let numberSpan = numberfor[i].firstElementChild;
-        console.log(angle);
+        // console.log(angle);
         (numberOrDash !== 'none') ? (
             numberfor[i].style.setProperty ('transform', 'rotate('+angle+'deg)')
         ) : (
@@ -279,22 +276,88 @@ const m = 60;
     const minHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
 
+    
+
     function setDate() {
         const now = new Date();
 
         const seconds = now.getSeconds();
         const secondsDegrees = ((seconds / 60) * 360) +90;
+        secondsDegrees < 440 ? (
+        secondHand.style.setProperty ('transition', 'all 0.035s'),
+        secondHand.style.setProperty ('transition-timing-function', 'cubic-bezier(0, 2.58, 0.58, 1)')
+        ) : ( 
+        secondHand.style.setProperty ('transition', 'all 0s ease 0s')
+        );
+        let secShadowAngleCount = (
+            (90 == secondsDegrees) ? 0 : 
+            (90 < secondsDegrees && secondsDegrees < 120) ? -1.3 :
+            (120 <= secondsDegrees && secondsDegrees < 150) ? -2.6 :
+            (135 <= secondsDegrees && secondsDegrees < 180) ? -3.9 :
+            (180 == secondsDegrees) ? -5.2 :
+            (180 < secondsDegrees && secondsDegrees < 210) ? -3.9 :
+            (210 <= secondsDegrees && secondsDegrees < 240) ? -2.6 :
+            (240 <= secondsDegrees && secondsDegrees < 270) ? -1.3 :
+            (270 == secondsDegrees) ? 0 : 
+            (270 < secondsDegrees && secondsDegrees < 300) ? 1.3 :
+            (300 <= secondsDegrees && secondsDegrees < 330) ? 2.6 :
+            (330 <= secondsDegrees && secondsDegrees < 360) ? 3.9 :
+            (360 == secondsDegrees) ? 5.2 :
+            (360 < secondsDegrees && secondsDegrees < 390) ? 3.9 :
+            (390 <= secondsDegrees && secondsDegrees < 420) ? 2.6 :
+            (420 <= secondsDegrees && secondsDegrees < 450) ? 1.3 : 0
+            );        
         secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        secondHand.style.boxShadow = `8px ${secShadowAngleCount}px 5px rgba(0, 0, 0, 0.3)`;
 
         const mins = now.getMinutes();
         const minsDegrees = ((mins / 60) * 360) +90;
+        let minShadowAngleCount = (
+            (90 == minsDegrees) ? 0 : 
+            (90 < minsDegrees && minsDegrees < 120) ? -1.3 :
+            (120 <= minsDegrees && minsDegrees < 150) ? -2.6 :
+            (135 <= minsDegrees && minsDegrees < 180) ? -3.9 :
+            (180 == minsDegrees) ? -5.2 :
+            (180 < minsDegrees && minsDegrees < 210) ? -3.9 :
+            (210 <= minsDegrees && minsDegrees < 240) ? -2.6 :
+            (240 <= minsDegrees && minsDegrees < 270) ? -1.3 :
+            (270 == minsDegrees) ? 0 : 
+            (270 < minsDegrees && minsDegrees < 300) ? 1.3 :
+            (300 <= minsDegrees && minsDegrees < 330) ? 2.6 :
+            (330 <= minsDegrees && minsDegrees < 360) ? 3.9 :
+            (360 == minsDegrees) ? 5.2 :
+            (360 < minsDegrees && minsDegrees < 390) ? 3.9 :
+            (390 <= minsDegrees && minsDegrees < 420) ? 2.6 :
+            (420 <= minsDegrees && minsDegrees < 450) ? 1.3 : 0
+            );
         minHand.style.transform = `rotate(${minsDegrees}deg)`;
+        minHand.style.boxShadow = `8px ${minShadowAngleCount}px 5px rgba(0, 0, 0, 0.3)`;
 
         const hours = now.getHours();
         const hoursDegrees = ((hours / 12) * 360) +90;
+        let hourShadowAngleCount = (
+            (90 == hoursDegrees) ? 0 : 
+            (90 < hoursDegrees && hoursDegrees < 120) ? -1.3 :
+            (120 <= hoursDegrees && hoursDegrees < 150) ? -2.6 :
+            (135 <= hoursDegrees && hoursDegrees < 180) ? -3.9 :
+            (180 == hoursDegrees) ? -5.2 :
+            (180 < hoursDegrees && hoursDegrees < 210) ? -3.9 :
+            (210 <= hoursDegrees && hoursDegrees < 240) ? -2.6 :
+            (240 <= hoursDegrees && hoursDegrees < 270) ? -1.3 :
+            (270 == hoursDegrees) ? 0 : 
+            (270 < hoursDegrees && hoursDegrees < 300) ? 1.3 :
+            (300 <= hoursDegrees && hoursDegrees < 330) ? 2.6 :
+            (330 <= hoursDegrees && hoursDegrees < 360) ? 3.9 :
+            (360 == hoursDegrees) ? 5.2 :
+            (360 < hoursDegrees && hoursDegrees < 390) ? 3.9 :
+            (390 <= hoursDegrees && hoursDegrees < 420) ? 2.6 :
+            (420 <= hoursDegrees && hoursDegrees < 450) ? 1.3 : 0
+            );
         hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-    }
+        hourHand.style.boxShadow = `8px ${hourShadowAngleCount}px 5px rgba(0, 0, 0, 0.3)`;
 
+    }
+    
     setInterval(setDate, 1000);
 </script>
 
